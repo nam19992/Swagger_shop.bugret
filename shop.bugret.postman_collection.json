@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "558d1539-16c9-4a7f-a84e-20cd1e10a669",
+		"_postman_id": "ce75b931-b63d-4a56-8385-75527eff24cc",
 		"name": "shop.bugret",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18539276"
+		"_exporter_id": "19999044"
 	},
 	"item": [
 		{
@@ -17,8 +17,7 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"var jsonData = pm.response.json();\r",
-							"pm.environment.set( \"id_items\",jsonData.result.id);"
+							"pm.collectionVariables.set( \"id_items\",pm.response.json().result.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -86,7 +85,7 @@
 			"response": []
 		},
 		{
-			"name": "Create item(Минимум параметров на входе)",
+			"name": "Create item with minimum fields",
 			"event": [
 				{
 					"listen": "test",
@@ -120,6 +119,189 @@
 							"key": "description",
 							"value": "Модное платье из новой коллекции!",
 							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://shop.bugred.ru/api/items/create/",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"api",
+						"items",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create item without name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Название товара не заполнено!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Шортики",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "section",
+							"value": "Платья",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Модное платье из новой коллекции!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://shop.bugred.ru/api/items/create/",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"api",
+						"items",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create item without section",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Категория не найдена!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Шортики",
+							"type": "text"
+						},
+						{
+							"key": "section",
+							"value": "Платья",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "Модное платье из новой коллекции!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://shop.bugred.ru/api/items/create/",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"api",
+						"items",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create item without description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Описание товара не заполнено!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Шортики",
+							"type": "text"
+						},
+						{
+							"key": "section",
+							"value": "Платья",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Модное платье из новой коллекции!",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -205,7 +387,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://shop.bugred.ru/api/items/create/",
+					"raw": "http://shop.bugred.ru/api/items/create/96",
 					"protocol": "http",
 					"host": [
 						"shop",
@@ -216,7 +398,7 @@
 						"api",
 						"items",
 						"create",
-						""
+						"96"
 					]
 				}
 			},
@@ -232,6 +414,7 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
+							"\r",
 							"pm.test(\"Body matches string\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"Товар обновлен!\");\r",
 							"});"
@@ -245,7 +428,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "<request>\r\n    <id>96</id>\r\n    <name>Шортики 3</name>\r\n    <section>Платья</section>\r\n    <description>тыгыдык</description>\r\n    <size>44</size>\r\n    <color>RED</color>\r\n    <price>666</price>\r\n    <params>dress, тест</params>\r\n</request>",
+					"raw": "<request>\r\n    <id>1</id>\r\n    <name>Шортики 3</name>\r\n    <section>Платья</section>\r\n    <description>тыгыдык</description>\r\n    <size>44</size>\r\n    <color>RED</color>\r\n    <price>666</price>\r\n    <params>dress, тест</params>\r\n</request>",
 					"options": {
 						"raw": {
 							"language": "xml"
@@ -328,6 +511,11 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Товар с ID \");\r",
+							"    pm.expect(pm.response.text()).to.include(\"успешно удален\");\r",
+							"});\r",
 							""
 						],
 						"type": "text/javascript"
@@ -365,17 +553,17 @@
 			"response": []
 		},
 		{
-			"name": "Delete Item(id not found)",
+			"name": "Delete Item (id not found)",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
 							"});\r",
 							"pm.test(\"Body matches string\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"Товар с ID 62 не найден!\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Товар с ID 999 не найден!\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -387,7 +575,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 62\r\n}",
+					"raw": "{\r\n    \"id\": 999\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -413,7 +601,7 @@
 			"response": []
 		},
 		{
-			"name": "меньше 10 карточек",
+			"name": "Search items",
 			"event": [
 				{
 					"listen": "test",
@@ -460,55 +648,12 @@
 				}
 			},
 			"response": []
-		},
+		}
+	],
+	"variable": [
 		{
-			"name": "больше 10 карточек",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"query\": \"Шортики\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://shop.bugred.ru/api/items/search/",
-					"protocol": "http",
-					"host": [
-						"shop",
-						"bugred",
-						"ru"
-					],
-					"path": [
-						"api",
-						"items",
-						"search",
-						""
-					]
-				}
-			},
-			"response": []
+			"key": "id_items",
+			"value": ""
 		}
 	]
 }
